@@ -11,6 +11,7 @@ java_library(
 
 java_binary(
     name = "array_java",
+    srcs = glob(["src/main/java/com/example/App.java"]),
     main_class = "com.example.App",
     runtime_deps = [":array_java_lib"],
 )

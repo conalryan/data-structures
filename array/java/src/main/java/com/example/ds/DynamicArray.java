@@ -3,18 +3,18 @@ package com.example.ds;
 public class DynamicArray {
     private int capacity;
     private int size;
-    private int[] array;
-
+    private Integer[] array;
+    
     public DynamicArray() {
         this.capacity = 10; // default capacity
         this.size = 0;
-        this.array = new int[this.capacity];
+        this.array = new Integer[this.capacity];
     }
 
     public DynamicArray(int capacity) {
         this.capacity = capacity;
         this.size = 0;
-        this.array = new int[this.capacity];
+        this.array = new Integer[this.capacity];
     }
 
     public int getCapacity() {
@@ -34,14 +34,46 @@ public class DynamicArray {
 
     public void append(int item) {
         if (size == capacity) {
-            this.capacity = this.capacity * 2;
-            int[] tmp = new int[this.capacity];
-            for (int i = 0; i < size; i++) {
-                tmp[i] = array[i];
-            }
-            array = tmp;
+            this.ensureCapacity(this.capacity * 2);
         }
         array[size] = item;
         size++;
+    }
+
+    public void insert(int item, int index) {
+        if (index < 0 || index > this.size) {
+            throw new IndexOutOfBoundsException();
+        } else if (this.size == this.capacity) {
+            this.ensureCapacity(this.capacity * 2);
+            this.array[index] = item;
+            this.size = index;
+        } else {
+            for (int i = this.size; i > index; i--) {
+                this.array[i] = this.array[i -1];
+            }
+            this.array[index] = item;
+            this.size++;
+        }
+    }
+
+    public void remove(int index) {
+        // Start at index up to size, shift left then delete last index
+        if (index < 0 || index > this.size) {
+            throw new IndexOutOfBoundsException();
+        }
+        for (int i = index; i < size -1; i++) {
+            this.array[i] = this.array[i + 1];
+        }
+        this.array[size -1] = 0; // or null in case of object
+        this.size--;
+    }
+
+    private void ensureCapacity(int capacity) {
+        this.capacity = capacity;
+            Integer[] tmp = new Integer[this.capacity];
+            for (int i = 0; i < size; i++) {
+                tmp[i] = this.array[i];
+            }
+            this.array = tmp;
     }
 }
