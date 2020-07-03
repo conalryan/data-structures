@@ -17,9 +17,19 @@ java_binary(
 )
 
 java_test(
-    name = "array_java_test",
+    name = "array_java_da_test",
     srcs = glob(["src/test/java/com/example/ds/**/*.java"]),
     test_class = "com.example.ds.DynamicArrayTest",
+    deps = [
+        "//:java_test_deps",
+        ":array_java_lib",
+    ],
+)
+
+java_test(
+    name = "array_java_sb_test",
+    srcs = glob(["src/test/java/com/example/ds/**/*.java"]),
+    test_class = "com.example.ds.StrBuilderTest",
     deps = [
         "//:java_test_deps",
         ":array_java_lib",

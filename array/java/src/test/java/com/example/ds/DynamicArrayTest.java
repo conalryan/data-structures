@@ -4,8 +4,6 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
-import java.beans.Transient;
-
 public class DynamicArrayTest {
 
     private DynamicArray da;
