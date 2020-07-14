@@ -34,7 +34,9 @@ public class DynamicArray {
     }
 
     public void append(int item) {
-        this.ensureCapacity();
+        if (this.size == this.capacity) {
+            this.ensureCapacity();
+        }
         this.array[size] = item;
         this.size++;
     }
@@ -43,15 +45,14 @@ public class DynamicArray {
         this.checkThrowOutOfBounds(index);
         if (this.size == this.capacity) {
             this.ensureCapacity();
-            this.array[index] = item;
-            this.size = index;
         } else {
+            // iterate backwards shifting values right
             for (int i = this.size; i > index; i--) {
                 this.array[i] = this.array[i -1];
             }
-            this.array[index] = item;
-            this.size++;
         }
+        this.array[index] = item;
+        this.size++;
     }
 
     public void remove(int index) throws IndexOutOfBoundsException{
@@ -71,13 +72,11 @@ public class DynamicArray {
     }
     
     private void ensureCapacity() {
-        if (this.size == this.capacity) {
-            this.capacity = this.capacity * DynamicArray.MULTIPLIER;
-            Integer[] tmp = new Integer[this.capacity];
-            for (int i = 0; i < this.size; i++) {
-                tmp[i] = this.array[i];
-            }
-            this.array = tmp;
+        this.capacity = this.capacity * DynamicArray.MULTIPLIER;
+        Integer[] tmp = new Integer[this.capacity];
+        for (int i = 0; i < this.size; i++) {
+            tmp[i] = this.array[i];
         }
+        this.array = tmp;
     }
 }

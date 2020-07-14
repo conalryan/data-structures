@@ -26,9 +26,35 @@ export class DynamicArray {
     }
 
     append(item: number): void {
-        this._ensureCapacity();
+        if (this._size === this._capacity) {
+            this._ensureCapacity();
+        }
         this._array[this._size] = item;
         this._size++;
+    }
+
+    insert(item: number, index: number): void {
+        this._checkThrowOutOfBounds(index);
+        if (this.size == this.capacity) {
+            this._ensureCapacity();
+        } else {
+            // iterate backwards shifting values right
+            for (let i = this._size; i > index; i--) {
+                this._array[i] = this._array[i -1];
+            }
+        }
+        this._array[index] = item;
+        this._size++;
+    }
+
+    remove(index: number): void {
+        // Start at index up to size, shift left then delete last index
+        this._checkThrowOutOfBounds(index);
+        for (let i = index; i < this._size -1; i++) {
+            this._array[i] = this._array[i + 1];
+        }
+        this._array[this._size -1] = 0; // or null in case of object
+        this._size--;
     }
 
     private _checkThrowOutOfBounds(index: Number): void {
@@ -38,13 +64,11 @@ export class DynamicArray {
     }
     
     private _ensureCapacity(): void {
-        if (this._size === this._capacity) {
-            this._capacity = this._capacity * DynamicArray._MULTIPLIER;
-            const tmp = Array(this._capacity);
-            for (let i = 0; i < this._size; i++) {
-                tmp[i] = this._array[i];
-            }
-            this._array = tmp;
+        this._capacity = this._capacity * DynamicArray._MULTIPLIER;
+        const tmp = Array(this._capacity);
+        for (let i = 0; i < this._size; i++) {
+            tmp[i] = this._array[i];
         }
+        this._array = tmp;
     }
 }
