@@ -1,4 +1,4 @@
-import { DynamicArray } from './DynamicArray';
+import { DynamicArray } from './dynamic-array';
 
 describe('DynamicArray', () => {
     it('should construct', () => {

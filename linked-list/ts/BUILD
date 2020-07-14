@@ -1,6 +1,6 @@
 package(default_visibility=["//visibility:public"])
 
-load("@npm_bazel_typescript//:index.bzl", "ts_devserver", "ts_library")
+load("@npm_bazel_typescript//:index.bzl", "ts_library")
 load("@npm_bazel_jasmine//:index.bzl", "jasmine_node_test")
 
 ts_library(
@@ -10,9 +10,9 @@ ts_library(
 )
 
 jasmine_node_test(
-    name = "da_test",
+    name = "ll_test",
     srcs = [
-        "src/dynamic-array.spec.ts",
+        "src/linked-list.spec.ts",
     ],
     deps = [
         "@npm//@types/jasmine",
