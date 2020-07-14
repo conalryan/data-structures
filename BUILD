@@ -9,3 +9,5 @@ java_library(
         "@maven//:org_hamcrest_hamcrest_library",
     ],
 )
+
+exports_files(["tsconfig.json"], visibility = ["//visibility:public"])
