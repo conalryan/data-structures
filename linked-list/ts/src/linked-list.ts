@@ -54,7 +54,25 @@ export class LinkedList<T> implements Linkable<T> {
     }
 
     delete(value: T): void {
-        // TODO
+        if (!this.head) {
+            return;
+        }
+        if (this.head.data === value) {
+            this.head = this.head.next ? this.head.next : undefined;
+            if (this.tail?.data === value) {
+                this.tail = this.head;
+            }
+        } else {
+            let n = this.head;
+            // Iterate to the pentultament node
+            while (n.next && n.next.data !== value) {
+                n = n.next;
+            }
+            n.next = n.next && n.next.next ? n.next.next : undefined;
+            if (this.tail?.data === value) {
+                this.tail = n.next || n;
+            }
+        }
     }
 
     deleteHead(): void {
