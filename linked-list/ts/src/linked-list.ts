@@ -76,11 +76,22 @@ export class LinkedList<T> implements Linkable<T> {
     }
 
     deleteHead(): void {
-        // TODO
+        const newHead = this.head?.next ? this.head?.next : undefined;
+        if (this.tail?.data === this.head?.data) {
+            this.tail = newHead;
+        }
+        this.head = newHead;
     }
 
     deleteTail(): void {
-        // TODO
+        let n = this.head;
+        // Iterate to penultament node
+        while (n?.next && n?.next?.next) {
+            n = n?.next;
+        }
+        // @ts-ignore: TS2532: Object is possibly 'undefined'
+        n.next = undefined;
+        this.tail = n;
     }
     
     find(value: T): void {
