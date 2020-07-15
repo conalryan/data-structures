@@ -9,8 +9,8 @@ import { LinkedListNode } from "./linked-list-node";
  */
 export interface Linkable<T> {
    
-    head: LinkedListNode<T>;
-    tail: LinkedListNode<T>;
+    head: LinkedListNode<T> | undefined;
+    tail: LinkedListNode<T> | undefined;
 
     /**
      * Add a node to the end of the list
