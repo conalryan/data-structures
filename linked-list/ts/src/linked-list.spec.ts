@@ -122,4 +122,43 @@ describe('linked list', () => {
         expect(l.head?.next).toEqual(undefined);
         expect(l.tail?.data).toEqual(11);
     });
+
+    it('should find', () => {
+        const l = new LinkedList<number>();
+        expect(l.head).toEqual(undefined);
+        expect(l.tail).toEqual(undefined);
+
+        l.append(11);
+        l.append(22);
+        l.append(33);
+        
+        expect(l.find(11)).toEqual(true);
+        expect(l.find(22)).toEqual(true);
+        expect(l.find(33)).toEqual(true);
+        expect(l.find(44)).toEqual(false);
+    });
+
+    it('should prepend', () => {
+        const l = new LinkedList<number>();
+        expect(l.head).toEqual(undefined);
+        expect(l.tail).toEqual(undefined);
+
+        l.append(11);
+        l.append(22);
+        l.append(33);
+
+        expect(l.head?.data).toEqual(11);
+        expect(l.head?.next?.data).toEqual(22);
+        expect(l.tail?.data).toEqual(33);
+
+        l.prepend(44);
+        expect(l.head?.data).toEqual(44);
+        expect(l.head?.next?.data).toEqual(11);
+        expect(l.tail?.data).toEqual(33);
+
+        l.prepend(55);
+        expect(l.head?.data).toEqual(55);
+        expect(l.head?.next?.data).toEqual(44);
+        expect(l.tail?.data).toEqual(33);
+    });
 });

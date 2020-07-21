@@ -94,11 +94,23 @@ export class LinkedList<T> implements Linkable<T> {
         this.tail = n;
     }
     
-    find(value: T): void {
-        // TODO
+    find(value: T): boolean {
+        let node: LinkedListNode<T> | undefined = this.head;
+        while (value && node && node.data !== value) {
+            node = node.next;
+        }
+        return !!(node && node.data === value);
     }
 
     prepend(value: T): void {
-        // TODO
+        const newNode = {
+            data: value,
+            next: undefined
+        };
+        if (this.head) {
+            // @ts-ignore
+            newNode.next = this.head;
+        }
+        this.head = newNode;
     }
 }

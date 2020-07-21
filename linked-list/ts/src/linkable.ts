@@ -35,7 +35,7 @@ export interface Linkable<T> {
     /**
      * Find a node in the list
      */
-    find: (value: T) => void;
+    find: (value: T) => boolean;
     
     /**
      * Add a node to the beginning of the list
